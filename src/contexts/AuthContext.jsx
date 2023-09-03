@@ -1,15 +1,17 @@
+// src/contexts/AuthContext.jsx
+
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState('')
-  const [tokenValid, setTokenValid] = useState(false);
+  const [token, setToken] = useState(''); // eslint-disable-next-line 
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const getToken = sessionStorage.getItem("LetoSave-auth-token");
-  // console.log(currentUser,tokenValid,token);
+
+  console.log(currentUser)
   
   const checkTokenValidity = async () => {
       try {
@@ -22,26 +24,24 @@ export function AuthProvider({ children }) {
           }
         );
         setCurrentUser(response.data.hospitalDetails);
-        setTokenValid(true);
       } catch (error) {
         sessionStorage.removeItem("LetoSave-auth-token");
+        setIsLoggedIn(false)
       }
   };
 
   useEffect(() => {
-    if(getToken){
-      setToken(getToken);
-    }
-    if(token){
-      checkTokenValidity();
-    }else{
-      // setIsLoggedIn(false);
-    }
+    if (getToken) {
+    setToken(getToken);
+    setIsLoggedIn(true); 
+  } else {
+    setIsLoggedIn(false);
+  }
 
-    if(currentUser && currentUser.password){
-      // setIsLoggedIn(true);
-    } // eslint-disable-next-line 
-  }, [token]);
+  if (token) {
+    checkTokenValidity();
+  }// eslint-disable-next-line 
+  }, [getToken, token]);
 
   const register = async (token) => {
     sessionStorage.setItem("LetoSave-auth-token", token);
@@ -67,8 +67,6 @@ export function AuthProvider({ children }) {
       value={{
         currentUser,
         token,
-        tokenValid,
-        setTokenValid,
         checkTokenValidity,
         isLoggedIn,
         setIsLoggedIn,

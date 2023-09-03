@@ -95,7 +95,7 @@ const SupportChartnewPage = () => {
                         </Badge>
                         <Badge color="secondary" showZero>
                             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                            <a href="!#" className='ms-3' style={{ textDecoration: "none", color: "black" }}>{currentUser.hospitalName}<p className='Adin'>Admin</p></a>
+                            <a href="!#" className='ms-3' style={{ textDecoration: "none", color: "black" }}>{currentUser && currentUser.hospitalName}<p className='Adin'>Admin</p></a>
                         </Badge>
 
                     </Stack>

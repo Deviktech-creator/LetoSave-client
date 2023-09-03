@@ -21,7 +21,7 @@ const ServiceManagmentAdd = () => {
     serviceCost: "",
   });
 
-  const [includesPostnatalCare, setIncludesPostnatalCare] = useState(false);
+  const [includePostnatalCare, setIncludePostnatalCare] = useState(false);
 
   useEffect(() => {
     if(serviceId){
@@ -39,7 +39,7 @@ const ServiceManagmentAdd = () => {
               serviceDescription: response.data.serviceDescription,
               serviceCost: response.data.serviceCost,
             });
-            setIncludesPostnatalCare(response.data.includePostnatalCare);
+            setIncludePostnatalCare(response.data.includePostnatalCare);
           }
         })
         .catch((error) => {
@@ -57,8 +57,10 @@ const ServiceManagmentAdd = () => {
   };
 
   const handlePostnatalCareChange = (e) => {
-    setIncludesPostnatalCare(e.target.checked);
+    const isChecked = e.target.checked;
+    setIncludePostnatalCare(isChecked);
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,10 +74,10 @@ const ServiceManagmentAdd = () => {
         serviceDescription: formData.serviceDescription,
         serviceCost: formData.serviceCost,
         doctorFee: formData.doctorFee,
-        includesPostnatalCare: includesPostnatalCare,
-        hospitalId: currentUser._id,
+        includePostnatalCare: includePostnatalCare,
+        hospitalId: currentUser && currentUser._id,
       };
-  
+      
       if (serviceId) {
         const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/hospital-service/${serviceId}`;
         const response = await axios.put(apiUrl, finalFormData);
@@ -206,11 +208,11 @@ const ServiceManagmentAdd = () => {
                 className="form-check-input"
                 type="checkbox"
                 id="postnatalCareSwitch"
-                checked={includesPostnatalCare}
+                checked={includePostnatalCare}
                 onChange={handlePostnatalCareChange}
               />
               <label className="form-check-label" htmlFor="postnatalCareSwitch">
-                {includesPostnatalCare ? "Yes" : "No"}
+                {includePostnatalCare ? "Yes" : "No"}
               </label>
             </div>
           </Form.Group>

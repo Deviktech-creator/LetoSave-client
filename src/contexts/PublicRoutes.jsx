@@ -1,3 +1,5 @@
+// src/contexts/PublicRoutes.jsx
+
 import React, { useEffect, useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
@@ -15,7 +17,7 @@ const PublicRoutes = () => {
       timeout = setTimeout(() => {
         setIsLoggedIn(false);
         setLoading(false);
-      }, 2000);
+      }, 3000);
     } else {
       setLoading(false);
     }

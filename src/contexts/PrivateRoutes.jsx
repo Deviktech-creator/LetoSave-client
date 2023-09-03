@@ -1,3 +1,5 @@
+// src/contexts/PrivateRoutes.jsx
+
 import React, { useEffect, useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
@@ -12,7 +14,7 @@ const PrivateRoutes = () => {
       timeout = setTimeout(() => {
         setIsLoggedIn(false);
         setLoading(false);
-      }, 2000);
+      }, 3000);
     } else {
       setLoading(false);
     }

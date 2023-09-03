@@ -13,7 +13,7 @@ const ServiceManagmentPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const hospitalId = currentUser._id;
+    const hospitalId = currentUser && currentUser._id;
     const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/hospital-services/${hospitalId}`;
 
     axios

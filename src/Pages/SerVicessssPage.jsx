@@ -107,7 +107,7 @@ const SerVicessssPage = () => {
                 className="ms-3"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <h6 className="admin-name">{currentUser.hospitalName}</h6>
+                <h6 className="admin-name">{currentUser && currentUser.hospitalName}</h6>
                 <p className="Adin">Admin</p>
               </Link>{" "}
             </Badge>

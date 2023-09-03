@@ -104,7 +104,7 @@ const DepossiiitPage = () => {
                             </Link>
                             <Badge color="secondary" showZero>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                                <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}><h6 className='admin-name'>{currentUser.hospitalName}</h6><p className='Adin'>Admin</p></Link>                            </Badge>
+                                <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}><h6 className='admin-name'>{currentUser && currentUser.hospitalName}</h6><p className='Adin'>Admin</p></Link>                            </Badge>
 
                         </Stack>
                     </Toolbar>

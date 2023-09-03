@@ -31,9 +31,10 @@ const CreatingPasswordPage = () => {
      if (!token) {
       navigate("/");
     } else if (currentUser) {
-      if (currentUser.password) {
+      if (currentUser && currentUser.password) {
         setIsLoggedIn(true);
       } else {
+        
       }
     }
   }// eslint-disable-next-line
