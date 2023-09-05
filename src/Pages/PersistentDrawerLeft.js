@@ -174,7 +174,7 @@ const PersistentDrawerLeft = () => {
           </ListItem>
           <ListItem>
             <img src={Patient} className="me-3" alt=""></img>
-            <Link className="nav-link" to="/user/patient-Management">
+            <Link className="nav-link" to="/user/patient-management">
               <ListItemText primary="Patient Management" />
             </Link>
           </ListItem>

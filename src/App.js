@@ -33,7 +33,7 @@ function App() {
           <Route path="" element={<RegistrationPage />} />
           <Route path="login" element={<WellComeBackPage />} />
           <Route path="register" element={<RegistrationPage />} />
-          <Route path="create-password" element={<CreatingPasswordPage />} />
+          {/* <Route path="create-password" element={<CreatingPasswordPage />} /> */}
           <Route
             path="create-password/:id"
             element={<CreatingPasswordPage />}
@@ -42,7 +42,7 @@ function App() {
         </Route>
         <Route path="/user" element={<PrivateRoutes />}>
           <Route path="dashboard" element={<DashboardHome />} />
-          <Route path="patient-Management" element={<PataintMana />} />
+          <Route path="patient-management" element={<PataintMana />} />
           <Route path="Deposite-Management" element={<DepossiiitPage />} />
           <Route path="service-Management" element={<SerVicessssPage />} />
           <Route path="hospital-service" element={<AddNew />} />
@@ -61,8 +61,12 @@ function App() {
           <Route path="Revenue-report" element={<RevenueReportNewPage />} />
           <Route path="Profile" element={<ProfileNewPage />} />
           <Route path="Add-Bank-Account" element={<AddBankAccountNewPage />} />
-          <Route
+          {/* <Route
             path="Single-patient-detail"
+            element={<SinglePageDetailPagessss />}
+          /> */}
+          <Route
+            path="single-patient-detail/:patientServiceId"
             element={<SinglePageDetailPagessss />}
           />
           <Route path="OtP" element={<SinglePatientDetail />} />

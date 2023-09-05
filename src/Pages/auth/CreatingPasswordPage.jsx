@@ -11,86 +11,54 @@ import { toast } from "react-hot-toast";
 const CreatingPasswordPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { currentUser, token, setIsLoggedIn } = useAuth();
+  const { login, setIsLoggedIn } = useAuth();
 
   useEffect(() => {
-    if (id) {
       const fetchTokenValidity = async () => {
-        try { // eslint-disable-next-line
+        try { 
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/api/hospital-set-password/${id}`
           );
-
+          console.log(response);
         } catch (error) {
           console.error("Error checking token validity:", error);
           navigate("/login");
         }
       };
       fetchTokenValidity();
-    } else{
-     if (!token) {
-      navigate("/");
-    } else if (currentUser) {
-      if (currentUser && currentUser.password) {
-        setIsLoggedIn(true);
-      } else {
-        
-      }
-    }
-  }// eslint-disable-next-line
-  }, [token, currentUser]);
+  }, []);
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleCreatePassword = async (e) => {
     e.preventDefault();
-
     if (password === confirmPassword) {
-      if (id) {
-        try {
-          const response = await axios.post(
-            `${process.env.REACT_APP_BACKEND_URL}/api/hospital-set-password/${id}`,
-            { password }
-          );
-
-          if (response.status === 200) {
-            toast.success(response.data.message)
-            navigate('/login');
-          } else {
-            console.log("Password reset failed");
-            toast.error(response.data.message)
-          }
-        } catch (error) {
-          console.error("API error:", error);
-          toast.error(error.response.data.message)
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/api/hospital-set-password/${id}`,
+          { password }
+        );
+        if (response.status === 200) {
+          const responseData = response.data;
+          const { token } = responseData;
+          toast.success(responseData.message);
+          login(token);
+          setIsLoggedIn(true);
+          navigate('/user/dashboard');
+        } else {
+          console.log("Password reset failed");
+          toast.error(response.data.message);
         }
-      } else {
-        try {
-          const response = await axios.post(
-            `${process.env.REACT_APP_BACKEND_URL}/api/hospital-set-password`,
-            { password },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-
-          if (response.status === 200) {
-            toast.success('Password Set Success')
-            setIsLoggedIn(true);
-          } else {
-            console.log("Password setting failed");
-          }
-        } catch (error) {
-          console.error("API error:", error);
-        }
+      } catch (error) {
+        console.error("API error:", error);
+        toast.error(error.response.data.message);
       }
     } else {
       console.log("Password and confirm password do not match");
     }
   };
+  
 
 
   return (

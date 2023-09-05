@@ -4,7 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 
-const OTPModal = ({ show, onClose, phone, token }) => {
+const OTPModal = ({ show, onClose, phone, hospitalId }) => {
+  
     const navigate = useNavigate();
   const [count, setCount] = useState(30);
 
@@ -49,19 +50,24 @@ const OTPModal = ({ show, onClose, phone, token }) => {
       const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/hospital-verify-phone-otp`;
       const requestData = {
         pin: enteredOTP,
+        hospitalId: hospitalId, 
       };
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }; // eslint-disable-next-line
-      const response = await axios.post(apiUrl, requestData, config);
-      toast.success('Otp Verify Success');
-      navigate('/create-password')
+  
+      const response = await axios.post(apiUrl, requestData);
+  
+      if (response.data.message === "Phone verification successful") {
+        toast.success('OTP Verify Success');
+        navigate(`/create-password/${response.data.forgotToken}`);
+      } else {
+        console.error("Phone verification failed:", response.data.message);
+        toast.error(response.data.message);
+      }
     } catch (error) {
       console.error("Error verifying OTP:", error);
+      toast.error("An error occurred while verifying OTP.");
     }
   };
+  
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {

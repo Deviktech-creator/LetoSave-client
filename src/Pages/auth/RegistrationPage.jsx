@@ -18,6 +18,7 @@ const RegistrationPage = () => {
   const certificationImageInputRef = useRef(null);
   const licenseImageInputRef = useRef(null);
   const [showOTPModal, setShowOTPModal] = useState(false);
+  const [hospitalId, setHospitalId] = useState(null);
   
   const [formData, setFormData] = useState({
     hospitalName: "",
@@ -61,20 +62,9 @@ const RegistrationPage = () => {
     e.preventDefault();
     
     try {
-      const formDataForAPI = new FormData();
-      formDataForAPI.append("hospitalName", formData.hospitalName);
-      formDataForAPI.append("district", formData.district);
-      formDataForAPI.append("subCounty", formData.subCounty);
-      formDataForAPI.append("village", formData.village);
-      formDataForAPI.append("zipCode", formData.zipCode);
-      formDataForAPI.append("phone", formData.phone);
-      formDataForAPI.append("email", formData.email);
-      formDataForAPI.append("certificationImage", formData.certificationImage);
-      formDataForAPI.append("licenseImage", formData.licenseImage);
-
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/api/hospital-register`,
-        formDataForAPI,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -82,19 +72,23 @@ const RegistrationPage = () => {
         }
       );
       
-      if(response.data.error)(
-        toast.error(response.data.error)
-        )
-
       if(response.data.message){
-        register(response.data.token)
+        setHospitalId(response.data.hospitalId);
         toast.success(response.data.message)
+        setShowOTPModal(true);
       }
 
-      setShowOTPModal(true);
     } catch (error) {
       console.error("Error registering hospital:", error);
-      toast.error(error.response.data.error);
+      if (error.response && error.response.data) {
+        if (error.response.data.error) {
+          toast.error(error.response.data.error);
+        } else if (error.response.data.message) {
+          toast.error(error.response.data.message);
+        }
+      } else {
+        toast.error("An error occurred while registering hospital.");
+      }
     }
   };
 
@@ -391,6 +385,7 @@ const RegistrationPage = () => {
                           show={showOTPModal}
                           onClose={() => setShowOTPModal(false)}
                           phone={formData.phone}
+                          hospitalId={hospitalId}
                           token={token}
                         />
                       </div>
