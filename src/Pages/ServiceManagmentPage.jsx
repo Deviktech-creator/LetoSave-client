@@ -182,7 +182,7 @@ const ServiceManagmentPage = () => {
                         </label>
                       </th>
                       <td className="pt-3">{service.wardType}</td>
-                      <td>{service.roomType}</td>
+                      <td className="pt-3">{service.roomType}</td>
                       <td className="pt-3">{service.deliveryType}</td>
                       <td className="pt-3">{service.serviceDescription}</td>
                       <td className="pt-3">{`UGX ${service.serviceCost}`}</td>

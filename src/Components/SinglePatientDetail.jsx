@@ -4,13 +4,19 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import MsgModal from "./MsgModal";
 
 const SinglePatientDetail = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { token, formatDateToDmy } = useAuth();
   const { patientServiceId } = useParams();
   const [patientService, setPatientService] = useState(null);
-//   console.log(patientService)
+  const [showMsgModal, setShowMsgModal] = useState(false);
+    // console.log(patientService)
+
+  const handleOpenMsgModal = () => {
+    setShowMsgModal(true);
+  };
 
   useEffect(() => {
     const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/patient-service/${patientServiceId}`;
@@ -31,31 +37,28 @@ const SinglePatientDetail = () => {
 
   const handleApproval = (status) => {
     const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/accept-decline-service`;
-  
+
     const requestData = {
       patientServiceId: patientServiceId,
-      status: status, 
+      status: status,
     };
-  
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-  
+
     axios
       .put(apiUrl, requestData, config)
       .then((response) => {
-        // console.log('Service Response:', response.data.message);
         toast.success(response.data.message);
-        navigate('/user/patient-management');
+        navigate("/user/patient-management");
       })
       .catch((error) => {
-        // console.error(`Error ${status} service:`, error);
         toast.error(error.response.data.error);
       });
   };
-  
 
   return (
     <>
@@ -95,7 +98,7 @@ const SinglePatientDetail = () => {
               src={`/images/uploads/${
                 patientService && patientService.patient.profilePicture
               }`}
-              style={{ width: "170px", height: "170px" }}
+              style={{ width: "170px", height: "170px", borderRadius: "15px" }}
               alt=""
             ></img>
           </div>
@@ -126,7 +129,11 @@ const SinglePatientDetail = () => {
               )}
 
               <div className="d-block d-md-none">
-                <img src="/images/mess.png" className="mt-2 me-2 " alt=""></img>
+                <img
+                  src="/images/mess.png"
+                  className="mt-2 me-2 "
+                  alt=""
+                ></img>
                 <img
                   src="/images/Group 415.png"
                   className="mt-2 me-2"
@@ -172,7 +179,7 @@ const SinglePatientDetail = () => {
             </div>
             <div className="border-bottom pb-3">
               <h5 className="dateof fw-semibold" style={{ marginLeft: "52px" }}>
-                {patientService && patientService.patient.phone}
+                + {patientService && patientService.patient.phone}
               </h5>
             </div>
             <div className="d-flex pt-3">
@@ -198,20 +205,39 @@ const SinglePatientDetail = () => {
             </div>
           </div>
           <div className="col-12 col-md-5">
-            <div className="d-none d-md-block">
+            <div
+              className="d-none d-md-block"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <img
                 src="/images/mess.png"
-                className="mt-2 pt-1 me-2 ps-5 ms-5"
+                className="me-2 ps-5 ms-5"
                 alt=""
-              ></img>
+                onClick={handleOpenMsgModal}
+              ></img>                
+              <MsgModal
+                  show={showMsgModal}
+                  onClose={() => setShowMsgModal(false)}
+                  phone={patientService && patientService.patient.phone}
+                  name={patientService && patientService.patient.name}
+                />
+                {/* {console.log(patientService && patientService.patient.name)} */}
               <img
                 src="/images/Group 415.png"
-                className="mt-2 me-2"
+                className="me-2"
                 alt=""
-                onClick={()=>{handleApproval('approved')}}
+                onClick={() => {
+                  handleApproval("approved");
+                }}
               ></img>
-              <img src="/images/cros.png" className="mt-2" alt="" 
-                onClick={()=>{handleApproval('declined')}}></img>
+              <img
+                src="/images/cros.png"
+                className=""
+                alt=""
+                onClick={() => {
+                  handleApproval("declined");
+                }}
+              ></img>
             </div>
             <div className="d-flex" style={{ paddingTop: "24px" }}>
               <img

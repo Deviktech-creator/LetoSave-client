@@ -15,7 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
 import MailIcon from "@mui/icons-material/Mail";
-
+ // eslint-disable-next-line 
 import { Avatar, Badge, Divider, Stack } from "@mui/material";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import Logo from "../Components/Assets/Icons/Group 329.png";
@@ -62,10 +62,7 @@ const AddBankAccountNewPage = () => {
   };
 
   const handleLogoutConfirm = () => {
-    // Perform actual logout action here
-    // For example: Redirect to logout page or clear session
-
-    // Close the modal after logout
+    
     setShowLogoutModal(false);
   };
 
@@ -128,7 +125,11 @@ const AddBankAccountNewPage = () => {
                 </Badge>
               </Link>
               <Badge color="secondary" showZero>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                
+                <div className="" style={{display: 'flex',justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'blue'}}>
+                  <img src="/images/adminlogo.png" alt="logo" />
+                </div>
                 <Link
                   to="/user/Profile"
                   className="ms-3"

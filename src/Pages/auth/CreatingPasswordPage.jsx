@@ -25,7 +25,7 @@ const CreatingPasswordPage = () => {
           navigate("/login");
         }
       };
-      fetchTokenValidity();
+      fetchTokenValidity(); // eslint-disable-next-line 
   }, []);
 
   const [password, setPassword] = useState("");

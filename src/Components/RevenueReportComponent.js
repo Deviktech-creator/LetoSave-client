@@ -1,9 +1,5 @@
- // eslint-disable-next-line 
-import React, { useState } from 'react'; // eslint-disable-next-line 
-import dognot from "../Components/Images/Untitled design (2).png" // eslint-disable-next-line 
-import str from "../Components/Images/Untitled design (3).png" // eslint-disable-next-line 
-import str1 from "../Components/Images/Untitled design (4).png" // eslint-disable-next-line 
-import str2 from "../Components/Images/Untitled design (5).png" // eslint-disable-next-line 
+import React from 'react';
+
 import Chart from "react-apexcharts";
 
 const RevenueReportComponent = () => {
@@ -66,76 +62,140 @@ const RevenueReportComponent = () => {
 
   };
   const options3 = {
-    series: [13, 15, 15],
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              showAlways: true,
+              label: 'Revenue Service',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              color: '#898989',
+              formatter: function () {
+                return 'UGX155,000';
+              }
+            },
+            value: {
+              show: true,
+              fontWeight: 600,
+              fontSize: '1.5rem',
+              offsetY: 16,
+              color: '#494949'
+            }
+          }
+        }
+      }
+    },
+    series: [30, 15, 30, 40],
+    labels: ['Ward Type', 'Private Room', 'VIP - Normal', 'Delivery'],
     chart: {
       width: 365, // Adjust the width to make it smaller
       type: 'donut',
     },
-    colors: ['#00FF00', '#FF0000', '#0000FF'], // Green, Red, Blue
+    colors: ['#064FB8', '#F7282F', '#06B871', '#C5DAF8'], // Green, Red, Blue
     dataLabels: {
       enabled: false
     },
     responsive: [{
-      breakpoint: 280,
+      breakpoint: 1025,
       options: {
         chart: {
-          width: 150 // Adjust the width for smaller screens
+          width: "100%",// Adjust the width for smaller screens
+          height: 400
         },
         legend: {
-          show: false
+          position: 'bottom',
+          offsetY: 0,
+          height: 130,
         }
       }
     }],
     legend: {
       position: 'right',
-      offsetY: 0,
+      offsetY: 70,
       height: 130,
     }
   };
   const options4 = {
-    series: [13, 15],
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              showAlways: true,
+              label: 'Rooms',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              color: '#898989',
+              formatter: function () {
+                return 'UGX175,500';
+              }
+            },
+            value: {
+              show: true,
+              fontWeight: 600,
+              fontSize: '1.5rem',
+              offsetY: 16,
+              color: '#494949',
+
+            }
+          }
+        }
+      }
+    },
+    series: [30, 15, 30],
+    labels: ['Private Room', 'VIP Room', 'General Room'],
     chart: {
       width: 365, // Adjust the width to make it smaller
       type: 'donut',
     },
-    colors: ['#00FF00', '#0000FF'], // Green,  Blue
+    colors: ['#064FB8', '#06B871', '#C5DAF8'], // Green, Red, Blue
     dataLabels: {
       enabled: false
     },
     responsive: [{
-      breakpoint: 280,
+      breakpoint: 1025,
       options: {
         chart: {
-          width: 150 // Adjust the width for smaller screens
+          width: "100%",// Adjust the width for smaller screens
+          height: 400
         },
         legend: {
-          show: false
-        }
+          position: 'bottom',
+          offsetY: 0,
+          height: 130,
+        },
       }
     }],
     legend: {
       position: 'right',
-      offsetY: 0,
+      offsetY: 90,
       height: 130,
     }
+
   };
-  const option5={
+  const option5 = {
     series: [{
       name: 'PRODUCT A',
-      data: [21, 22, 10, 28, 16, 21, 13, 30 , 55 , 53 , 21 , 33]
+      data: [21, 22, 10, 28, 16, 21, 13, 30, 55, 53, 21, 33]
     }, {
       name: 'PRODUCT B',
-      data: [23, 12, 10, 58, 76, 11, 13, 30 , 55 , 53 , 21 , 23]
+      data: [23, 12, 10, 58, 76, 11, 13, 30, 55, 53, 21, 23]
     }, {
       name: 'PRODUCT C',
-      data: [21, 22, 10, 28, 16, 11, 13, 30 , 55 , 83 , 21 , 13]
+      data: [21, 22, 10, 28, 16, 11, 13, 30, 55, 83, 21, 13]
     }],
-    
-    colors: ['#99E0FF', '#0AB8F7' , '#2778EE' , '#064FB8' , '#2F65B2'], // Green,  Blue
-      chart: {
+
+    colors: ['#99E0FF', '#0AB8F7', '#2778EE', '#064FB8', '#2F65B2'], // Green,  Blue
+    chart: {
       type: 'bar',
       height: 350,
-      width:700,
+      width: "100%",
       stacked: true,
       stackType: '100%'
     },
@@ -143,30 +203,33 @@ const RevenueReportComponent = () => {
       enabled: false
     },
     responsive: [{
-      breakpoint: 480,
+      breakpoint: 430,
       options: {
+        chart: {
+          width: '100%',
+        },
         legend: {
           position: 'bottom',
           offsetX: -10,
-          offsetY: 0
-        }
-      }
+          offsetY: 0,
+        },
+      },
     }],
     xaxis: {
       categories: [
         ['Jan'],
         ['Feb'],
-        ['March'],
-        ['April'],
+        ['Mar'],
+        ['Apr'],
         ['May'],
-        ['June'],
-        ['July'],
-        ['August'],
+        ['Jun'],
+        ['Jul'],
+        ['Aug'],
         ['Sept'],
         ['Oct'],
         ['Nov'],
         ['Dec'],
-    ],
+      ],
     },
     fill: {
       opacity: 1
@@ -179,34 +242,34 @@ const RevenueReportComponent = () => {
         colors: ['#FF0000', '#00FF00', '#0000FF'], // Set custom colors for legend labels
         useSeriesColors: false, // Set to false to use custom colors
         items: [
-            {
-                // Customize the label for the first series
-                name: 'Custom Label 1',
-                style: {
-                    color: '#FF0000' // Set a custom color for this label
-                }
-            },
-            {
-                // Customize the label for the second series
-                name: 'Custom Label 2',
-                style: {
-                    color: '#00FF00' // Set a custom color for this label
-                }
-            },
-            {
-                // Customize the label for the third series
-                name: 'Custom Label 3',
-                style: {
-                    color: '#0000FF' // Set a custom color for this label
-                }
+          {
+            // Customize the label for the first series
+            name: 'Custom Label 1',
+            style: {
+              color: '#FF0000' // Set a custom color for this label
             }
+          },
+          {
+            // Customize the label for the second series
+            name: 'Custom Label 2',
+            style: {
+              color: '#00FF00' // Set a custom color for this label
+            }
+          },
+          {
+            // Customize the label for the third series
+            name: 'Custom Label 3',
+            style: {
+              color: '#0000FF' // Set a custom color for this label
+            }
+          }
         ]
-    }
+      }
     },
     yaxis: {
       labels: {
         formatter: function (value) {
-          return  "UNIX 200";
+          return "UNIX 200";
         }
       },
     },
@@ -234,7 +297,7 @@ const RevenueReportComponent = () => {
                 </div>
                 <div className="d-flex align-items-center">
                   <select id="inputState" className="form-select">
-                    <option selected>Weekly</option>
+                    <option>Weekly</option>
                     <option>...</option>
                   </select>
 
@@ -242,24 +305,26 @@ const RevenueReportComponent = () => {
               </div>
 
               <div className="card-body">
-                <table className="table table-bordered text-center mt-4">
-                  {/* <img src={dognot} className='img-fluid' alt='' ></img> */}
+                <div className="table-container" style={{ height: '400px' }}>
+                  <div className="table table-bordered text-center mt-4">
+                    {/* <img src={dognot} className='img-fluid' alt='' ></img> */}
 
-                  <div className="app">
-                    <div className="row">
-                      <div className="mixed-chart">
-                        <Chart
-                          options={options}
-                          series={options.series}
-                          type="bar"
-                          height={options.chart.height}
-                        />
+                    <div className="app">
+                      <div className="row">
+                        <div className="mixed-chart">
+                          <Chart
+                            options={options}
+                            series={options.series}
+                            type="bar"
+                            height={options.chart.height}
+                          />
+                        </div>
                       </div>
                     </div>
+
+
                   </div>
-
-
-                </table>
+                </div>
               </div>
             </div>
           </div>
@@ -273,7 +338,7 @@ const RevenueReportComponent = () => {
                 </div>
                 <div className="d-flex align-items-center">
                   <select id="inputState" className="form-select">
-                    <option selected>Weekly</option>
+                    <option>Weekly</option>
                     <option>...</option>
                   </select>
 
@@ -281,22 +346,24 @@ const RevenueReportComponent = () => {
               </div>
 
               <div className="card-body">
-                <table className="table table-bordered text-center mt-4">
-                  {/* <img src={str} className=' img-fluid' alt=''></img> */}
+                <div className="table-container" style={{ height: '400px' }}>
+                  <div className="table table-bordered text-center mt-4">
+                    {/* <img src={str} className=' img-fluid' alt=''></img> */}
 
-                  <div className="app">
-                    <div className="row">
-                      <div className="mixed-chart">
-                        <Chart
-                          options={options3}
-                          series={options3.series}
-                          type="donut"
-                          height={options3.chart.width}
-                        />
+                    <div className="app">
+                      <div className="row">
+                        <div className="mixed-chart">
+                          <Chart
+                            options={options3}
+                            series={options3.series}
+                            type="donut"
+                            height={options3.chart.width}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </table>
+                </div>
               </div>
             </div>
           </div>
@@ -313,7 +380,7 @@ const RevenueReportComponent = () => {
                 </div>
                 <div className="d-flex align-items-center">
                   <select id="inputState" className="form-select">
-                    <option selected>Weekly</option>
+                    <option>Weekly</option>
                     <option>...</option>
                   </select>
 
@@ -321,22 +388,24 @@ const RevenueReportComponent = () => {
               </div>
 
               <div className="card-body">
-                <table className="table table-bordered text-center mt-4">
-                {/* <img src={str1} className=' img-fluid' alt='' ></img> */}
-                  <div className="app">
-                    <div className="row">
-                      <div className="mixed-chart">
-                        <Chart
-                          options={option5}
-                          series={option5.series}
-                          type="bar"
-                          width={option5.chart.width}
-                          height={option5.chart.height}
-                        />
+                <div className="table-container" style={{ height: '400px' }}>
+                  <div className="table table-bordered text-center mt-4">
+                    {/* <img src={str1} className=' img-fluid' alt='' ></img> */}
+                    <div className="app">
+                      <div className="row">
+                        <div className="mixed-chart">
+                          <Chart
+                            options={option5}
+                            series={option5.series}
+                            type="bar"
+                            width={option5.chart.width}
+                            height={option5.chart.height}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </table>
+                </div>
               </div>
             </div>
           </div>
@@ -351,29 +420,31 @@ const RevenueReportComponent = () => {
                 <div className="d-flex align-items-center">
 
                   <select id="inputState" className="form-select">
-                    <option selected>Weekly</option>
+                    <option>Weekly</option>
                     <option>...</option>
                   </select>
                 </div>
               </div>
               <div className="card-body">
-                <table className="table table-bordered text-center mt-4">
-                  {/* <img src={str2} className='img-fluid' alt='' ></img> */}
+                <div className="table-container" style={{ height: '400px' }}>
+                  <div className="table table-bordered text-center mt-4">
+                    {/* <img src={str2} className='img-fluid' alt='' ></img> */}
 
 
-                  <div className="app">
-                    <div className="row">
-                      <div className="mixed-chart">
-                        <Chart
-                          options={options4}
-                          series={options4.series}
-                          type="donut"
-                          height={options4.chart.width}
-                        />
+                    <div className="app">
+                      <div className="row">
+                        <div className="mixed-chart">
+                          <Chart
+                            options={options4}
+                            series={options4.series}
+                            type="donut"
+                            height={options4.chart.width}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </table>
+                </div>
               </div>
             </div>
           </div>

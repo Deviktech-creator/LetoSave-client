@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
+import MailIcon from '@mui/icons-material/Mail'; // eslint-disable-next-line 
 import { Avatar, Badge, Divider, Stack } from '@mui/material';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import Logo from "../Components/Assets/Icons/Group 329.png"
@@ -98,7 +98,11 @@ const NotificationNewPage = () => {
                                 </Badge>
                             </Link>
                             <Badge color="secondary" showZero>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                                
+                                <div className="" style={{display: 'flex',justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#064FB8'}}>
+                  <img src="/images/adminlogo.png" alt="logo" />
+                </div>
                                 <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}><h6 className='admin-name'>{currentUser && currentUser.hospitalName}</h6><p className='Adin'>Admin</p></Link>                            </Badge>
 
                         </Stack>

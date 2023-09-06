@@ -13,17 +13,17 @@ import { useAuth } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 
 const RegistrationPage = () => {
-  const { register, token } = useAuth();
-  
+  const { token } = useAuth();
+
   const certificationImageInputRef = useRef(null);
   const licenseImageInputRef = useRef(null);
   const [showOTPModal, setShowOTPModal] = useState(false);
   const [hospitalId, setHospitalId] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     hospitalName: "",
     district: "London",
-    subCounty: "London",
+    subCounty: "Westminster",
     village: "",
     zipCode: "",
     phone: "",
@@ -60,7 +60,7 @@ const RegistrationPage = () => {
 
   const handleRegisterNow = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/api/hospital-register`,
@@ -71,13 +71,12 @@ const RegistrationPage = () => {
           },
         }
       );
-      
-      if(response.data.message){
+
+      if (response.data.message) {
         setHospitalId(response.data.hospitalId);
-        toast.success(response.data.message)
+        toast.success(response.data.message);
         setShowOTPModal(true);
       }
-
     } catch (error) {
       console.error("Error registering hospital:", error);
       if (error.response && error.response.data) {
@@ -164,6 +163,9 @@ const RegistrationPage = () => {
                             <option value="London">London</option>
                             <option value="Paris">Paris</option>
                             <option value="New York">New York</option>
+                            <option value="Los Angeles">Los Angeles</option>
+                            <option value="Chicago">Chicago</option>
+                            {/* Add more districts here */}
                           </Form.Select>
                         </div>
                         <div className="col-md-6 mb-4">
@@ -173,12 +175,16 @@ const RegistrationPage = () => {
                             onChange={handleInputChange}
                             size="lg"
                           >
-                            <option value="London">London</option>
-                            <option value="Paris">Paris</option>
-                            <option value="New York">New York</option>
+                            <option value="Westminster">Westminster</option>
+                            <option value="Camden">Camden</option>
+                            <option value="Brooklyn">Brooklyn</option>
+                            <option value="Manhattan">Manhattan</option>
+                            <option value="Queens">Queens</option>
+                            {/* Add more sub-counties here */}
                           </Form.Select>
                         </div>
                       </div>
+
                       <div className="row">
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">

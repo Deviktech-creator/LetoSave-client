@@ -16,17 +16,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 import MailIcon from '@mui/icons-material/Mail';
-
+ // eslint-disable-next-line 
 import { Avatar, Badge, Divider, Stack } from '@mui/material';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import Logo from "../Components/Assets/Icons/Group 329.png"
-import iconnoone from "../Components/Assets/Icons/dashboard.png"
-import Patient from "../Components/Assets/Icons/patient.png"
-import Customer from "../Components/Assets/Icons/customer-service.png"
-import Ellips from "../Components/Assets/Icons/Icon.png"
-import Layer from "../Components/Assets/Icons/Layer_x0020_1.png"
-import report from "../Components/Assets/Icons/report.png"
-import logout from "../Components/Assets/Icons/logout.png"
+// import Logo from "../Components/Assets/Icons/Group 329.png"
+// import iconnoone from "../Components/Assets/Icons/dashboard.png"
+// import Patient from "../Components/Assets/Icons/patient.png"
+// import Customer from "../Components/Assets/Icons/customer-service.png"
+// import Ellips from "../Components/Assets/Icons/Icon.png"
+// import Layer from "../Components/Assets/Icons/Layer_x0020_1.png"
+// import report from "../Components/Assets/Icons/report.png"
+// import logout from "../Components/Assets/Icons/logout.png"
 
 import { Link } from 'react-router-dom';
 import SuportAnChart from '../Components/SuportAnChart';
@@ -104,7 +104,11 @@ const SupportAndChatNewPage = () => {
                                 </Badge>
                             </Link>
                             <Badge color="secondary" showZero>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                                
+                                <div className="" style={{display: 'flex',justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#064FB8'}}>
+                  <img src="/images/adminlogo.png" alt="logo" />
+                </div>
                                 <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}><h6 className='admin-name'>{currentUser && currentUser.hospitalName}</h6><p className='Adin'>Admin</p></Link>                            </Badge>
 
                         </Stack>
@@ -131,7 +135,7 @@ const SupportAndChatNewPage = () => {
 
                 >
                     <div className='d-flex justify-content-center' style={{ backgroundColor: "#0749A8", paddingTop: "13px" }}>
-                        <img src={Logo} alt='' style={{ width: '35px', height: "35px" }}></img>
+                        <img src='/images/Group 329.png' alt='' style={{ width: '35px', height: "35px" }}></img>
                         <h1 className='fw-bold ms-2' style={{ fontSize: "1.8em", color: "white", letterSpacing: '3px' }}>
                             LetoSave
                         </h1>
@@ -140,44 +144,44 @@ const SupportAndChatNewPage = () => {
                     <List >
                         {/* {['Dashboard', 'Patient Management', 'Deposits Management', 'Service Management', 'Support / Chart', 'Reports', 'Logout'].map((text, index) => ( */}
                         <ListItem>
-                            <img src={iconnoone} className='me-3' alt=''></img>
+                            <img src='/images/dashboard.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/">
                                 <ListItemText primary='Dashboard' />
                             </Link>
                         </ListItem>
                         <ListItem>
-                            <img src={Patient} className='me-3' alt=''></img>
+                            <img src='/images/patient.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/user/patient-management">
                                 <ListItemText primary='Patient Management' />
                             </Link>
                         </ListItem>
 
                         <ListItem>
-                            <img src={Ellips} className='me-3' alt=''></img>
+                            <img src='/images/Icon.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/user/Deposite-Management">
                                 <ListItemText primary='Deposits Management' />
                             </Link>
                         </ListItem>
                         <ListItem>
-                            <img src={Customer} className='me-3' alt=''></img>
+                            <img src='/images/customer-service.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/user/service-Management">
                                 <ListItemText primary='Service Management' />
                             </Link>
                         </ListItem>
                         <ListItem>
-                            <img src={Layer} className='me-3' alt=''></img>
+                            <img src='/images/Layer_x0020_1.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/user/Support/Chart-Management">
                                 <ListItemText primary='Support / Chart' />
                             </Link>
                         </ListItem>
                         <ListItem>
-                            <img src={report} className='me-3' alt=''></img>
+                            <img src='/images/report.png' className='me-3' alt=''></img>
                             <Link className="nav-link" to="/user/Reports-Management">
                                 <ListItemText primary='Reports' />
                             </Link>
                         </ListItem>
                         <ListItem className='cursor-pointer'>
-                        <img src={logout} className='me-3' alt=''></img>
+                        <img src='/images/logout.png' className='me-3' alt=''></img>
                         
                             <ListItemText primary='Logout'  onClick={handleLogoutClick} />
                        
@@ -189,7 +193,7 @@ const SupportAndChatNewPage = () => {
 
                 </Drawer>
 
-                <main style={{ flexGrow: 1, marginLeft: open ? drawerWidth : 0, backgroundColor: 'wheate' }}>
+                <main style={{ flexGrow: 1, marginLeft: open ? drawerWidth : 0, backgroundColor: '#F7F9FC' }}>
                    <SuportAnChart/>
                    <LogoutModal show={showLogoutModal} onClose={handleLogoutClose} onLogout={handleLogoutConfirm}/>
                 </main>

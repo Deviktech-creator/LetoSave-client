@@ -24,8 +24,8 @@ import ListItem from '@mui/material/ListItem';
 
 import ListItemText from '@mui/material/ListItemText';
 
-import MailIcon from '@mui/icons-material/Mail';
-import Boxes from "../Components/Dashboardhome/Boxes"
+import MailIcon from '@mui/icons-material/Mail'; // eslint-disable-next-line 
+import Boxes from "../Components/Dashboardhome/Boxes" // eslint-disable-next-line 
 import { Avatar, Badge, Divider, Stack } from '@mui/material';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import Logo from "../Components/Assets/Icons/Group 329.png"
@@ -94,8 +94,12 @@ const SupportChartnewPage = () => {
                             <NotificationsRoundedIcon sx={{ fontSize: 25, }} className='mt-2' />
                         </Badge>
                         <Badge color="secondary" showZero>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                            <a href="!#" className='ms-3' style={{ textDecoration: "none", color: "black" }}>{currentUser && currentUser.hospitalName}<p className='Adin'>Admin</p></a>
+                            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                            
+                            <div className="" style={{display: 'flex',justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#064FB8'}}>
+                  <img src="/images/adminlogo.png" alt="logo" />
+                </div>
+                            <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}>{currentUser && currentUser.hospitalName}<p className='Adin'>Admin</p></Link>
                         </Badge>
 
                     </Stack>

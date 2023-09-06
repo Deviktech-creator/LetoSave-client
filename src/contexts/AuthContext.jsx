@@ -73,6 +73,22 @@ export function AuthProvider({ children }) {
     return formattedDate;
   }
 
+  
+  function formatDate(dateString) {
+    const options = {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: false, 
+    };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      "en-US",
+      options
+    );
+    return formattedDate;
+  }
 
   return (
     <AuthContext.Provider
@@ -85,7 +101,8 @@ export function AuthProvider({ children }) {
         register,
         login,
         logout,
-        formatDateToDmy
+        formatDateToDmy,
+        formatDate
 
       }}
     >

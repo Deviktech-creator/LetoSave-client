@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -44,7 +44,11 @@ const CustomAppBar = ({ open, handleDrawerToggle }) => {
                         </Badge>
                     </Link>
                     <Badge color="secondary" showZero>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                        
+                        <div className="" style={{display: 'flex',justifyContent: 'center', alignItems: 'center', width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#064FB8'}}>
+                  <img src="/images/adminlogo.png" alt="logo" />
+                </div>
                         <Link to="/user/Profile" className='ms-3' style={{ textDecoration: "none", color: "black" }}>{currentUser && currentUser.hospitalName}<p className='Adin'>Admin</p></Link>
                     </Badge>
                 </Stack>

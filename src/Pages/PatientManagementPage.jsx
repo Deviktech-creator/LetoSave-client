@@ -6,14 +6,15 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast"; // eslint-disable-next-line 
+import MsgModal from "../Components/MsgModal";
 
 const PatientManagementPage = () => {
   const navigate = useNavigate();
-  const { token } = useAuth();
-  const [services, setServices] = useState([]);
+  const { token, formatDate } = useAuth();
+  const [services, setServices] = useState([]); // eslint-disable-next-line 
+  const [showMsgModal, setShowMsgModal] = useState(false);
 
-  
   const handleApproval = (status, patientServiceId) => {
     const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/accept-decline-service`;
 
@@ -31,6 +32,14 @@ const PatientManagementPage = () => {
     axios
       .put(apiUrl, requestData, config)
       .then((response) => {
+        const updatedServices = services.map((service) => {
+          if (service._id === patientServiceId) {
+            service.status = status;
+          }
+          return service;
+        });
+        setServices(updatedServices);
+
         toast.success(response.data.message);
       })
       .catch((error) => {
@@ -54,28 +63,16 @@ const PatientManagementPage = () => {
       })
       .catch((error) => {
         console.error("Error fetching related hospital services:", error);
-      });
-  }, [token, handleApproval]);
-
-  function formatDate(dateString) {
-    const options = {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    };
-    const formattedDate = new Date(dateString).toLocaleDateString(
-      "en-US",
-      options
-    );
-    return formattedDate;
-  }
+      }); // eslint-disable-next-line
+  }, [token]);
 
   const handleOpenPatientDeatils = (patientServiceId) => {
     navigate(`/user/single-patient-detail/${patientServiceId}`);
   };
-
+ // eslint-disable-next-line 
+  const handleOpenMsgModal = () => {
+    setShowMsgModal(true);
+  };
 
   return (
     <>
@@ -217,7 +214,8 @@ const PatientManagementPage = () => {
                     onClick={() => {
                       handleOpenPatientDeatils(service._id);
                     }}
-                  >
+                    >
+                    {/* {console.log(service._id)} */}
                     {formatDate(service.time)}
                   </td>
                   <td
@@ -232,7 +230,7 @@ const PatientManagementPage = () => {
                       handleOpenPatientDeatils(service._id);
                     }}
                   >
-                    UGX 343,546
+                    {/* UGX 343,546 */}
                   </td>
                   <td
                     className="pt-3"
@@ -240,7 +238,7 @@ const PatientManagementPage = () => {
                       handleOpenPatientDeatils(service._id);
                     }}
                   >
-                    UGX 343,546
+                    {/* UGX 343,546 */}
                   </td>
                   <td
                     className="pt-3"
@@ -248,9 +246,7 @@ const PatientManagementPage = () => {
                       handleOpenPatientDeatils(service._id);
                     }}
                   >
-                    {service.service.deliveryType === "Normal"
-                      ? "UGX 343,546"
-                      : ""}
+                    {formatDate(service.patient.expectedDelivery)}
                   </td>
                   <td
                     className="pt-3"
@@ -270,10 +266,23 @@ const PatientManagementPage = () => {
                     >
                       {service.status.toUpperCase()}
                     </span>
-                    <img src="/images/mess.png" className="me-2" alt="" />
+                    <img
+                      src="/images/mess.png"
+                      className="me-2"
+                      alt=""
+                      onClick={() => {
+                        handleOpenPatientDeatils(service._id);
+                      }}
+                      // onClick={handleOpenMsgModal}
+                    />
+                    {/* <MsgModal
+                      show={showMsgModal}
+                      onClose={() => setShowMsgModal(false)}
+                      phone={service.patient.phone}
+                    /> */}
                     <img
                       src="/images/Group 415.png"
-                      className="me-2 mt-2"
+                      className="me-2"
                       alt=""
                       onClick={() => {
                         handleApproval("approved", service._id);
@@ -281,10 +290,10 @@ const PatientManagementPage = () => {
                     />
                     <img
                       src="/images/cros.png"
-                      className="mt-2"
+                      className=""
                       alt=""
                       onClick={() => {
-                        handleApproval("declined", service._id); 
+                        handleApproval("declined", service._id);
                       }}
                     />
                   </td>

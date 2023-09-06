@@ -117,7 +117,7 @@ const NavigationAndContent = () => {
                       {currentUser && currentUser.zipCode}
                     </h4>
                     <h4 className="fw-semibold mt-4">
-                      {currentUser && currentUser.phone}
+                      {`+${currentUser && currentUser.phone}`}
                     </h4>
                     <h4 className="fw-semibold mt-4">
                       {currentUser && currentUser.email}
